@@ -5,8 +5,9 @@
 
 | comando | Descrizione |
 | ------ | ------ |
-| val | inizializza qualsiasi cosa.I numeri possono essere: interi, reali, negativi|
+| val | inizializza qualsiasi cosa. La variabile può essere di tipo : *intera, reale, negativa, carattere, stringa, booleana, unit value(singolo valore)*|
 | ~ | numero negativo|
+| if() then() else();| se allora, altrimenti (parentesi opzionali)|
 | fun | inizializza funzione|
 | fun rec | inizializza funzione ricorsiva|
 | DA TROVARE | inizializza funzione ricorsiva|
@@ -36,6 +37,7 @@ val x = ~3: int
 rispettivamente abbiamo creato una variabile *reale* ed una  *negativa*.
 
 **operazioni tra variabili**
+
 Vediamo alcuni esempi:
 ```sh
 > 5+4;
@@ -51,7 +53,7 @@ val it = 2.65: real
 > (~5)*4;
 val it = ~20: int
 ```
-Se abbiamo già inizializzato le variabili e vogliamo utilizzarle per qualche operazione basta richiamarle.Vediamo alcuni esempi:
+Se abbiamo già inizializzato le variabili e vogliamo utilizzarle per qualche operazione basta richiamarle. Vediamo alcuni esempi:
 ```sh
 > val x =5;
 val x = 5: int
@@ -62,8 +64,56 @@ val it = 10: int
 > y*(x*x);
 val it = 50: int
 ```
+Inoltre possiamo memorizzare su una nuova variabile il risultato di un operazione (Ovviamente la nuova varibile deve essere dello stesso tipo delle altre):
+```sh
+> val a= x+y;
+val a = 7: int
+```
+**variabili booleane**
+```sh
+> val t= true;
+val t = true: bool
+> val f=false;
+val f = false: bool
+> 5=3;
+val it = false: bool
+```
+La verifica dell'uguaglianza vale solo per gli interi.
+
+**stampa variabili**
+
+Per poter visualizzare il contenuto di una variabile basta richiamarla:
+```sh
+> a;
+val it = 7: int
+> f;
+val it = false: bool
+```
 Come si nota le operazione `valgono SOLAMENTTE per variabili dello STESSO TIPO`. 
+
  #
+ ## if then else
+ Vediamo subito un esempio:
+ ```sh
+ > if 5>0 then true else false;
+val it = true: bool
+ ```
+Al posto di true e false possiao mettere qualsiasi cosa ad esempio:
+```sh
+> if 5>0 then 10 else 7;
+val it = 10: int
+```
+Possiamo memorizzare questa condione in una variabile:
+```sh
+> val ris= if 5>0 then 5 else 0;
+val ris = 5: int
+> ris;
+val it = 5: int
+```
+#
+## funzioni
+
+#
  ### by kuper 01/03/2019
 > fun power (n,m)= if m=0 then 1 else n*power(n,m-1);
 val power = fn: int * int -> int
