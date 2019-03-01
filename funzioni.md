@@ -1,8 +1,19 @@
 # Poly/ML 5.7.1 Release
-## comandi ed esercizi 01/03/2019
-### by Kuper
+## comandi ed esercizi 01/03/2019 by Kuper
 
+### **COMANDI utili**
 
+| comando | Descrizione |
+| ------ | ------ |
+| val | inizializza qualsiasi cosa|
+| int | inizializza intero|
+| real | inizializza numero reale|
+| ~ | numero negativo|
+| fun | inizializza funzione|
+| fun rec | inizializza funzione ricorsiva|
+| DA TROVARE | inizializza funzione ricorsiva|
+
+##
 > fun power (n,m)= if m=0 then 1 else n*power(n,m-1);
 val power = fn: int * int -> int
 > val c= power(2,3);
@@ -54,3 +65,6 @@ val f = fn: int * int -> int
 > fun derivative2 f x=(f(x)-f(x-0.001))/0.001;
 val derivative2 = fn: (real -> real) -> real -> real
 > 
+
+
+> val introot m=let fun aux(k,m)=if k*k >m then k-1 else aux(k+1,m) in aux ;//da finire FOTO DYLAN
