@@ -11,6 +11,7 @@
 | fun NOME(INPUT)=ESPRESSIONE;| inizializza funzione|
 | VARIABILE= fn INPUT=>ESPRESSIONE | inizializza una funzione all'interno di una variabile |
 | val rec | inizializza --- ricorsiva|
+| case VARIABILE of VARIABILE=>CONSEGUENZA \|VARIABILE =>CONSEGUENZA \|_(*DEFAULT*)=>3;  | switch case|
 
 ---
 ## Le variabili
@@ -107,7 +108,7 @@ Possiamo memorizzare questa condione in una variabile:
 ```sml
 > val ris= if 5>0 then 5 else 0;
 val ris = 5: int
-> ris;
+> ris; (*RICHIAMO*)
 val it = 5: int
 ```
 ---
@@ -116,10 +117,10 @@ Per esempio vogliamo creare una funzione che permetta di elevare un numero x all
 ```sml
 > fun eleva(x,n)=if n=0 then 1 else x*(eleva(x,n-1));
 val eleva = fn: int * int -> int
-> eleva(5,2); 
+> eleva(5,2);   (*RICHIAMO*)
 val it = 25: int
 ```
-Inoltre possiamo memorizzare il risultato di una variabile:
+Inoltre possiamo assegnare il risultato di una variabile:
 ```sml
 > val ris= eleva(3,3);
 val ris = 27: int
@@ -136,7 +137,20 @@ Richiamiamo la funzione:
 > f 4;
 val it = 6: int
 ```
-
+## switch
+Come al solito lo switch ha i vari case e quello di default. Vediamo un esempio:
+```sml
+> fun f(x)= case x of
+# 1=>1      (*PRIMO CASO*)
+# |2=>2     (*SECONDO CASO*)
+# |_=>3;    (*CASO DI DEFAULT*)
+val f = fn: int -> int
+(*TEST*)
+> f(19);
+val it = 3: int
+> f(2);
+val it = 2: int
+```
 ***
  ### by kuper 01/03/2019
  ```sml
