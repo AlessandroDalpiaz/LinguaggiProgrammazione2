@@ -24,7 +24,8 @@ public class main {
        Studente s= new Studente("Pippo","Cesare",125);
        s.libretto.addEsame("Geometria",27);
        s.libretto.addEsame("Fisica",22);
-       System.out.print(s.persona.nome+""+s.persona.cognome+"");
+       
+       System.out.print(s.persona.nome+"-"+s.persona.cognome+"; ");
        System.out.println(s.libretto.media);
        
 
