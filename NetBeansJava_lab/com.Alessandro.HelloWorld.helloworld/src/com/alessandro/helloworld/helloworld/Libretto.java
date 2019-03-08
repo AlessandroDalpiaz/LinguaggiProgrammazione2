@@ -27,13 +27,13 @@ public class Libretto {
         esami[indice].nome=_n;
         esami[indice].voto=_v;
         indice++;
-        
+        media= CalcolaMedia();
     }
     private float CalcolaMedia(){
         int sum=0;
-        for (int i = 0; i < 10; i++) {
-            sum+=esami[i].voto;
+        for (int i = 0; i < indice; i++) {
+           sum+=esami[i].voto;
         }
-        return sum/10;
+        return sum/ (float) indice;
     }
 }
