@@ -12,6 +12,7 @@
 | VARIABILE= fn INPUT=>ESPRESSIONE | inizializza una funzione all'interno di una variabile |
 | val rec | inizializza --- ricorsiva|
 | case VARIABILE of VARIABILE=>CONSEGUENZA \|VARIABILE =>CONSEGUENZA \|_(*DEFAULT*)=>3;  | switch case|
+| goto | Salto nel ciclo|
 
 ---
 ## Le variabili
@@ -104,7 +105,7 @@ Al posto di true e false possiao mettere qualsiasi cosa ad esempio:
 > if 5>0 then 10 else 7;
 val it = 10: int
 ```
-Possiamo memorizzare questa condione in una variabile:
+Possiamo memorizzare questa condizione in una variabile:
 ```sml
 > val ris= if 5>0 then 5 else 0;
 val ris = 5: int
@@ -119,6 +120,11 @@ Per esempio vogliamo creare una funzione che permetta di elevare un numero x all
 val eleva = fn: int * int -> int
 > eleva(5,2);   (*RICHIAMO*)
 val it = 25: int
+(*--OPPURE POSSO CREARE UN'UNICA VARIABILE PER IL SUO INPUT--*)
+> val x=(2,3);             (* una variabile a 2 parametri*)
+val x = (2, 3): int * int
+> eleva(x);                (* richiamo con solo X *)
+val it = 8: int
 ```
 Inoltre possiamo assegnare il risultato di una variabile:
 ```sml
@@ -131,12 +137,19 @@ Oppure creare una funzione "al volo al suo interno",cioè:
 val y = 2: int
 > val f= fn x=>x+y;
 val f = fn: int -> int
-```
-Richiamiamo la funzione:
-```sml
-> f 4;
+
+> f 4; (*richiamiamo la funzione + INPUT*)
 val it = 6: int
 ```
+Una *funzione* dentro un'altra *funzione*
+```sml
+> fun alcubo(x)= eleva(x,3);
+val alcubo = fn: int -> int
+
+> alcubo(3);(*richiamiamo la funzione + INPUT*)
+val it = 27: int
+```
+---
 ## switch
 Come al solito lo switch ha i vari case e quello di default. Vediamo un esempio:
 ```sml
@@ -150,6 +163,17 @@ val f = fn: int -> int
 val it = 3: int
 > f(2);
 val it = 2: int
+```
+---
+## goto
+Alcuni linguaggi permettono di eseguire salti all’interno del for per mezzo del comando. Vediamo un esempio:
+```sml
+while true do{
+read(X) ;
+if X = end_of_file then goto fine;
+elabora ( X ) ;
+}
+fine: (*continuo del codice oppure una seconda funzione*)
 ```
 ***
  ### by kuper 01/03/2019
