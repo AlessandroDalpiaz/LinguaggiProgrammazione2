@@ -176,6 +176,50 @@ elabora ( X ) ;
 fine: (*continuo del codice oppure una seconda funzione*)
 ```
 ***
+ ### by kuper 15/03/2019
+ da int to real
+ ```sml
+> fun g(m:int)= fn f:int->real => if m <= 0 then 0.0 else f(m-1) + g(m-1) f;
+val g = fn: int -> (int -> real) -> real
+> fun toreal(i:int) = real(i);
+val toreal = fn: int -> real
+> g 7 toreal;
+val it = 21.0: real
+
+
+> fun minimun f 0 = raise Minimun
+# |minimun f m = let fun min2(x,y): real = if x<y then x else y
+# fun minn(i,z) =
+# if i=m then z else minn(i+1,min2(z,f i))
+# in minn(1, f 0) end;
+val minimun = fn: (int -> real) -> int -> real
+> fun minimun2 g n m = minimun (fn i=>minimun(fn j => g(i,j)) n ) m;
+val minimun2 = fn: (int * int -> real) -> int -> int -> real
+
+> type currency =string;
+eqtype currency
+
+> type money = real* currency;
+type money = real * currency
+> fun convert (from,to)=
+# let val toeur= fn
+#   (x,"eur") => x
+# | (x,"usd") => x/1.05 eqtype currency (*da errore ma è uguale*)
+
+# datatype money = Eur of real |........
+> datatype list = leaf of int | node of (int*list);
+datatype list = leaf of int | node of int * list
+> val rec Len = fn leaf _ => 1
+| node(_,l)=>1+Len l;
+val rec Concat = fn (leaf v,l) =node(v,l)
+| node(v,l1), l2) => node (v, Concat(l1,l2));
+fn x =>x;
+datatype 'a oerror =error ! value of ' a;
+value 5;
+altro....
+
+
+```
  ### by kuper 01/03/2019
  ```sml
 > fun power (n,m)= if m=0 then 1 else n*power(n,m-1);
