@@ -176,6 +176,90 @@ elabora ( X ) ;
 fine: (*continuo del codice oppure una seconda funzione*)
 ```
 ***
+ ### by kuper 29/03/2019
+```sml
+> val meteo = fn x => case x of
+# 1 => "sole"
+# |2 => "neve"
+# |_ => "non lo so";
+> val rec containedin = fn (l1,l2) => if isempty (l1) then true
+# else ismembre (car l1,l2) andalso containedin.....
+> val rec sum = fn empty =>0
+# | cons(a,l) => a+sum l;
+poly: : error: Constructor (cons) has not been declared Found near cons (a, l)
+Static Errors
+> val x = [1,2];
+val x = [1, 2]: int list
+> val x =[1,2.2];
+poly: : error: Elements in a list have different types.
+   Item 1: 1 : int
+   Item 2: 2.2 : real
+   Reason:
+      Can't unify int (*In Basis*) with real (*In Basis*)
+         (Different type constructors)
+Found near [1, 2.2]
+Static Errors
+> val x=(2,2.2);
+val x = (2, 2.2): int * real
+> val a=[];
+val a = []: 'a list
+> it
+# ;
+val it = 4: int
+> itt;
+val it = [6, 7, 8]: int list
+> rev itt;
+val it = [8, 7, 6]: int list
+> val it =[1,3,4];
+val it = [1, 3, 4]: int list
+> List.revAppend(it,itt);
+val it = [4, 3, 1, 6, 7, 8]: int list
+> [it,itt];
+val it = [[4, 3, 1, 6, 7, 8], [6, 7, 8]]: int list list
+> it@itt;
+poly: : error: Type error in function application.
+   Function: @ : int list list * int list list -> int list list
+   Argument: (it, itt) : int list list * int list
+   Reason:
+      Can't unify int list (*In Basis*) with int (*In Basis*)
+         (Different type constructors)
+Found near it @ itt
+Static Errors
+> fun square n=n*n;
+val square = fn: int -> int
+> it;
+val it = [[4, 3, 1, 6, 7, 8], [6, 7, 8]]: int list list
+> itt;
+val it = [6, 7, 8]: int list
+> List.map square itt;
+val it = [36, 49, 64]: int list
+> it
+# ;
+val it = [36, 49, 64]: int list
+> itt;
+val it = [6, 7, 8]: int list
+> List.map square it;
+val it = [36, 49, 64]: int list
+> fun sum (l:int list):int case l of
+poly: : error: = expected but case was found
+# [] => 0
+# | x::xs => x^(concat xs);
+Static Errors
+> fun sum (l:int list):int = case l of
+# [] => 0 | x::xs => x^(concat xs);
+poly: : error: Clauses in case have different types.
+   Clause 1: [] => 0 : string list -> int
+   Clause 2: x :: xs => x ^ (concat xs) : string list -> string
+   Reason:
+      Can't unify int (*In Basis*) with string (*In Basis*)
+         (Different type constructors)
+Found near case l of [] => 0 | x :: xs => x ^ (concat xs)
+Static Errors
+> fun sum (l:int list):int = case l of
+# [] => 0 | x::xs => x+(sum xs);
+
+```
+***
  ### by kuper 15/03/2019
  da int to real
  ```sml
