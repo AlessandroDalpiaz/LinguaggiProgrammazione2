@@ -13,7 +13,7 @@
 | val rec | inizializza --- ricorsiva|
 | case VARIABILE of VARIABILE=>CONSEGUENZA \|VARIABILE =>CONSEGUENZA \|_(*DEFAULT*)=>3;  | switch case|
 | goto | Salto nel ciclo|
-
+http://sml-family.org/Basis/list.html
 ---
 ## Le variabili
 
@@ -176,8 +176,108 @@ elabora ( X ) ;
 fine: (*continuo del codice oppure una seconda funzione*)
 ```
 ***
+
+(lamdax.x(xy))(lamdaz.zx) ==> f(x)=(x.xy)*f(z)=z.x
+--> x(xy)(barrato) (lamdazzx)((lamdazzx)y)'
+
+### by kuper 12/04/2019
+ ```sml
+ esercizio da capire e finire
+val rec test= fn empty => (fn f=>0)
+| cons(l,l) => (fn f)=>.....
+
+datatype list = empty | cons of (int*list);
+fun initlist 
+
+val rec member = fn
+empty => (fn i =>0)
+| cons(a,l) = fn 0 => a
+| i => member l(i-1);
+
+val a cons(1,cons(2,cons(3,empty))); # inizializzo
+val b cons(1,cons(2,cons(1,empty)));
+
+member b 2: # richiama l elemento 2 in b
+val rec pal=fn 
+empty => (fn i => true)
+|cons(a,l) => fn i => (
+if a<=1 then true else a= member l (i-1)) and also pal 1 (i-2));
+
+type checking
+
+fun comb(n,m)=
+if m=0 orelse m=n then 1
+else comb(n-1,m)+ comb (n-1,m-1);
+
+sum[3,4,5];
+String.^("ab","cd");
+val concat = foldr String.^ "";
+concat ["ab","cd","ef"]
+
+fun lenght l = foldl (fn(_,a => a+1) 0 l;
+lenght [1,3,4]
+
+1::[2,3];
+List.:: (1, [2,3]);
+
+fun rev l = foldl List.:: [] l;
+rev [1,2,3]
+
+fun map f l = foldr (fn (x,a) => (f x)::a) [] l;
+val f = fn x => x*x;
+map f [1,2,3];
+val f = fn x => x<0
+fun filter f l= foldr fn(x,a) => if f x then x::a else a) [] l;
+filter f [1,~1,2,~3];
+
+List.tabulate (5,(fn n =>n*n));
+val square = fn n =>n*n;
+List.tabulate(10,square)
+
+
+```
+***
  ### by kuper 29/03/2019
-```sml
+ ```sml
+ val test = fn f => fn l => List.lenght (List.filter f l);
+ val greatertwo = fn n => n>2;
+ val a ={1,2,3,4,5,6};//quadre
+ test greatertwo a ;
+eq [1,2] [2,1];
+a List.rev a;
+val palindrome = fn l => l=List.rev l;
+palindrome a;
+a;
+val a = []..
+fun x ->) 12 ;===> int: 12
+fun x y -> x y
+
+let f2 x y = (x @(y x))
+
+val rec copy(a:int,b) = if(a=0) then [] else copy(a-1,b)
+
+val rec sumlist = fn([].[]) => []
+| (|1.[]) => |1
+| ([].|2) => |2
+| (|1,|2) => ((List.hd |1) +(List.hd l2))::sumList((List.tl l1),(List.tl l2));
+
+val rec isin =fn x => (fn [] => false
+| y::l => if y =x then true else isin x l);
+
+val rec remove_dup = fn [] => []
+| y::l => if (isin y l) then remove_dup | else y::(remove_dup l);
+
+remove_dup [[1],[1,2],[1,2];
+remove_dup ["a","a","a"];
+
+fun first_list [] =[]
+| first_list((x,y)::l) =x::first_list l;
+first_list [(1,2),(1,3)];
+
+ ```
+***
+ ### by kuper 29/03/2019
+ ```sml
 > val meteo = fn x => case x of
 # 1 => "sole"
 # |2 => "neve"
@@ -259,7 +359,6 @@ Static Errors
 # [] => 0 | x::xs => x+(sum xs);
 
 ```
-***
  ### by kuper 15/03/2019
  da int to real
  ```sml
@@ -269,8 +368,6 @@ val g = fn: int -> (int -> real) -> real
 val toreal = fn: int -> real
 > g 7 toreal;
 val it = 21.0: real
-
-
 > fun minimun f 0 = raise Minimun
 # |minimun f m = let fun min2(x,y): real = if x<y then x else y
 # fun minn(i,z) =
