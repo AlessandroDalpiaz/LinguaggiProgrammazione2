@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JavaFXApplication7.jnlp">
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="EsempioPingPong.jnlp">
   <information>
-    <title>JavaFXApplication7</title>
+    <title>EsempioPingPong</title>
     <vendor>Alessandro</vendor>
     <description>null</description>
     <offline-allowed/>
@@ -11,11 +11,11 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication7.jar" size="18160" download="eager" />
+    <jar href="EsempioPingPong.jar" size="18373" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JavaFXApplication7" >
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="EsempioPingPong" >
     <param name="requiredFXVersion" value="2.2+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="javafxapplication7.JavaFXApplication7"  name="JavaFXApplication7" />
+  <jfx:javafx-desc  width="800" height="600" main-class="javafxapplication7.JavaFXApplication7"  name="EsempioPingPong" />
   <update check="always"/>
 </jnlp>

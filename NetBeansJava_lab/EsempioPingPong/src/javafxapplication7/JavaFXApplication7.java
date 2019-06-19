@@ -40,12 +40,28 @@ public class JavaFXApplication7 extends Application {
         stage2.sizeToScene();
         stage2.setX(100);
         stage2.setY(80);
-        stage2.show(); 
+        stage2.show();
+        
+        
         Stage stage1 = new Stage();
+        Text t =new Text(50,100,"The quick brown fox jumps over\n" + " the lazy dog");
+        t.setTextAlignment(TextAlignment.CENTER);
+        t.setWrappingWidth(50);
+        t.setFill(Paint.valueOf("BLUE"));
+        Group g = new Group(t);
+        Scene scene = new Scene(g);
+        stage1.setTitle("Titolo della finestra 1");
+        stage1.setScene(scene);
+        // set stage dimension
+        stage1.setWidth(399);
+        stage1.setHeight(399);
+        // set stage position
+        stage1.setX(100);
+        stage1.setY(80);
+        // make stage visible 
         stage1.show();
         stage2.centerOnScreen();
-        stage1.wait(1000,1000);
-        stage1.close();
+        
         
     }
 
