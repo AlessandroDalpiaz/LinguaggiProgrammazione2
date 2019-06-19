@@ -9,14 +9,18 @@ import java.awt.Font;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javax.swing.event.HyperlinkEvent;
 //import javafx.scene.text.*;
 
 /**
@@ -62,6 +66,19 @@ public class JavaFXApplication7 extends Application {
         stage1.show();
         stage2.centerOnScreen();
         
+        Stage stage3 =new Stage();
+        Circle cerchio= new Circle(50,50,50);
+        cerchio.setFill(Color.GREEN);
+        cerchio.setCenterX(200);
+        cerchio.setCenterY(100);
+        Group g3 =new Group(cerchio);
+        Scene scene3 =new Scene(g3);
+        stage3.setScene(scene3);
+        stage3.setMinHeight(400);
+        stage3.setMinWidth(400);
+        stage3.setX(1400);
+        stage3.setY(200);
+        stage3.show();
         
     }
 
