@@ -41,7 +41,7 @@ public class main extends Application {
         System.exit(1);
         }
         
-        Image image = new Image("file://" + file.getAbsolutePath(), 500, 500, true, true);
+        Image image = new Image("file:" + file.getAbsolutePath(), 500, 500, true, true);
         ImageView iw = new ImageView(image);
         Group root = new Group(iw);
         Scene scene = new Scene(root, 500,500);
