@@ -28,17 +28,38 @@ public class main {
         int z;
         boolean corretto =true;
         do{
-        try{
-            System.out.println("scrivi numero");
-            inputString=scanner.nextLine();
-           z = Integer.parseInt(inputString);
-            System.out.println("input valido!");
-            corretto=false;
-        }catch(NumberFormatException ex){
-            	System.out.println("input non valido!");
+            try{
+                System.out.println("scrivi numero");
+                inputString=scanner.nextLine();
+                z = Integer.parseInt(inputString);
+                System.out.println("input valido!");
+                corretto=false;
+            }catch(NumberFormatException ex){
+                System.out.println("input non valido!");
                 System.out.println(ex);
                 corretto =true;
-        }
+            }finally{
+                    System.out.println("---------------");
+            }
         }while(corretto);
     }
 }
+/** OUTPUT
+10
+3.1415026
+scrivi numero
+a
+input non valido!
+java.lang.NumberFormatException: For input string: "a"
+---------------
+scrivi numero
+b
+input non valido!
+java.lang.NumberFormatException: For input string: "b"
+---------------
+scrivi numero
+30
+input valido!
+---------------
+
+**/
