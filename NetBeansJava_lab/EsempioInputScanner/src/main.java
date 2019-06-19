@@ -26,14 +26,19 @@ public class main {
         Scanner scanner =new Scanner(System.in);
         String inputString;
         int z;
-        System.out.println("scrivi numero");
-        inputString=scanner.nextLine();
-        try{	
+        boolean corretto =true;
+        do{
+        try{
+            System.out.println("scrivi numero");
+            inputString=scanner.nextLine();
            z = Integer.parseInt(inputString);
             System.out.println("input valido!");
+            corretto=false;
         }catch(NumberFormatException ex){
             	System.out.println("input non valido!");
                 System.out.println(ex);
+                corretto =true;
         }
+        }while(corretto);
     }
 }
