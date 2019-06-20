@@ -12,10 +12,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -29,7 +35,11 @@ public class main extends Application {
         BorderPane root=new BorderPane();
         VBox finale=new VBox();
         TextField numUno= new TextField();
-        TextField numDue= new TextField();
+        numUno.setMinHeight(100);
+        //numUno.setFont(Font.font("Verdana", FontWeight.BOLD, 70));
+        Text numDue= new Text();
+        numDue.setFont(new Font(60));
+        numDue.setText("55");
         HBox Onepiu =  new HBox();
         HBox Fourmeno=  new HBox();
         HBox SevDiv=  new HBox();
@@ -52,11 +62,7 @@ public class main extends Application {
         bottoni.add(new Button("0"));
         bottoni.add(new Button("rad"));
         bottoni.add(new Button("X"));
-        double tmp=root.getWidth()/4;
-        System.out.println(tmp);
-        for (int i = 0; i < 16; i++) {
-            bottoni.get(i).setMinWidth(tmp);
-        }
+        
         for (int i = 0; i < 4; i++) {
             Onepiu.getChildren().add(bottoni.get(i));
         }
@@ -71,8 +77,29 @@ public class main extends Application {
         }
         finale.getChildren().addAll(numUno,numDue,Onepiu,Fourmeno,SevDiv,ZeroCancPer);
         root.setCenter(finale);
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 400, 700);
+        double tmp=root.getWidth()/4;
+        System.out.println(tmp);
         
+        
+        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            System.out.println("CLICCATO"); 
+            System.out.println(e.getSource());
+            System.out.println(e.getTarget());
+            } 
+        };
+        
+        
+        
+        
+        for (int i = 0; i < 16; i++) {
+            bottoni.get(i).setMinWidth(tmp);
+            bottoni.get(i).setMinHeight(tmp+20);
+            bottoni.get(i).setFont(new Font(40));
+            bottoni.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+        }
         primaryStage.setTitle("Calcolatrice");
         primaryStage.setScene(scene);
         primaryStage.show();
