@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import java.util.Random;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,16 +23,52 @@ import javafx.stage.Stage;
  * @author Alessandro
  */
 public class CartaFX extends StackPane {
-    CartaFX(){
-        Rectangle rett=new Rectangle(100,200);
-        rett.setFill(Color.GREENYELLOW);
-        rett.setStroke(Color.BLACK);
+    Rectangle rett=new Rectangle(100,200);
+    Text t = new Text();
+    CartaFX(int j,int i) {
+       n=j;
+       seme= scelta(i);
+       switch(i){
+           case 0:rett.setFill(Color.RED);break;
+           case 1:rett.setFill(Color.VIOLET);break;
+           case 2:rett.setFill(Color.BLANCHEDALMOND);break;
+           case 3:rett.setFill(Color.GREENYELLOW);break;
+       }
+       
+       rett.setStroke(Color.BLACK);
+       
+       t.setFont(new Font(20));
+       t.setTextAlignment(TextAlignment.JUSTIFY);
+       t.setText(n+" "+seme);
+       
+       this.getChildren().addAll(rett,t);
+       //this.setWidth(400);
+    }
+    enum Tsseme{C,P,Q,F}
+    int n;
+    Tsseme seme;
+
+
+    public void stampa(){
+        System.out.println(n+" "+ seme);
+    }
+    public Tsseme scelta(int i){
+        Tsseme seme = null;
+        switch(i){
+            case 0:seme=Tsseme.C; break;
+            case 1:seme=Tsseme.P; break;
+            case 2:seme=Tsseme.Q; break;
+            case 3:seme=Tsseme.F; break;
+        }
+        return seme;
         
-        Text t = new Text();
-        t.setFont(new Font(20));
-        t.setTextAlignment(TextAlignment.JUSTIFY);
-        t.setText("CARTA");
-        this.getChildren().addAll(rett,t);
+    }
+    //sovrascrivo metodo toString()
+    public String toString(){
+         return n+" "+ seme;
+    }
+    CartaFX(){
+        
     }
     
 }

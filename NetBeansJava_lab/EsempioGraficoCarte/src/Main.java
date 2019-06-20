@@ -15,7 +15,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -42,9 +44,42 @@ public class Main extends Application {
         });
         
         BorderPane root =new BorderPane();
-        CartaFX cc =new CartaFX();
+        VBox tavolo = new VBox();
+        HBox tipo1 =new HBox();
+        HBox tipo2 =new HBox();
+        HBox tipo3 =new HBox();
+        HBox tipo4 =new HBox();
+        CartaFX cc =new CartaFX(2,2);
+        ArrayList<CartaFX> mazzoFX=new ArrayList<CartaFX>();
         
-        root.setCenter(cc);
+        //inizializzo
+        for(int i=0;i<4;i++){
+            for (int j = 1; j < 14; j++) {
+                mazzoFX.add(new CartaFX(j,i));
+                }
+        }
+        for (int i = 0; i < 13; i++) {
+                mazzoFX.get(i).setPrefWidth(110);
+                mazzoFX.get(i).setPrefHeight(210);
+                tipo1.getChildren().add(mazzoFX.get(i));
+        }
+        for (int i = 13; i < 26; i++) {
+                mazzoFX.get(i).setPrefWidth(110);
+                mazzoFX.get(i).setPrefHeight(210);
+                tipo2.getChildren().add(mazzoFX.get(i));
+        }
+        for (int i = 26; i < 39; i++) {
+                mazzoFX.get(i).setPrefWidth(110);
+                mazzoFX.get(i).setPrefHeight(210);
+                tipo3.getChildren().add(mazzoFX.get(i));
+        }
+        for (int i = 39; i < 52; i++) {
+                mazzoFX.get(i).setPrefWidth(110);
+                mazzoFX.get(i).setPrefHeight(210);
+                tipo4.getChildren().add(mazzoFX.get(i));
+        }
+        tavolo.getChildren().addAll(tipo1,tipo2,tipo3,tipo4);
+        root.setCenter(tavolo);
         Scene scene = new Scene(root, 300, 250);
         
         primaryStage.setTitle("Gioco Carte");
