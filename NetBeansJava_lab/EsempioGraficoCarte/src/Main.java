@@ -12,8 +12,10 @@ import java.util.LinkedList;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -51,13 +53,14 @@ public class Main extends Application {
         HBox tipo4 =new HBox();
         CartaFX cc =new CartaFX(2,2);
         ArrayList<CartaFX> mazzoFX=new ArrayList<CartaFX>();
-        
+   
         //inizializzo
         for(int i=0;i<4;i++){
             for (int j = 1; j < 14; j++) {
                 mazzoFX.add(new CartaFX(j,i));
                 }
         }
+        Collections.shuffle(mazzoFX);
         for (int i = 0; i < 13; i++) {
                 mazzoFX.get(i).setPrefWidth(110);
                 mazzoFX.get(i).setPrefHeight(210);
@@ -77,15 +80,21 @@ public class Main extends Application {
                 mazzoFX.get(i).setPrefWidth(110);
                 mazzoFX.get(i).setPrefHeight(210);
                 tipo4.getChildren().add(mazzoFX.get(i));
+                //mazzoFX.get(i).addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
         }
+
         tavolo.getChildren().addAll(tipo1,tipo2,tipo3,tipo4);
         root.setCenter(tavolo);
+        root.autosize();
+        
         Scene scene = new Scene(root, 300, 250);
         
         primaryStage.setTitle("Gioco Carte");
         primaryStage.setScene(scene);
         primaryStage.show();
-        
+        primaryStage.setX(150);
+        primaryStage.setMinHeight(1000);
+        primaryStage.setMinWidth(1500);
         
         ArrayList<Carta> mazzo = new ArrayList<Carta>();
         LinkedList<Carta> mazzo2 = new LinkedList<Carta>();

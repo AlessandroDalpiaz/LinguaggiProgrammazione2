@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +26,18 @@ import javafx.stage.Stage;
 public class CartaFX extends StackPane {
     Rectangle rett=new Rectangle(100,200);
     Text t = new Text();
+    
+        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            System.out.println("CLICCATO"); 
+            System.out.println(e.getSource());
+            rett.setFill(Color.TRANSPARENT);
+            t.setText(null);
+            } 
+        };    
+    
+    
     CartaFX(int j,int i) {
        n=j;
        seme= scelta(i);
@@ -42,7 +55,7 @@ public class CartaFX extends StackPane {
        t.setText(n+" "+seme);
        
        this.getChildren().addAll(rett,t);
-       //this.setWidth(400);
+       this.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
     }
     enum Tsseme{C,P,Q,F}
     int n;
