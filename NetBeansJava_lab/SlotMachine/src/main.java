@@ -124,7 +124,6 @@ public static final int NUM_MONETE = 3; // numero di monete disponibili
         public void handle(javafx.scene.input.MouseEvent e) {
             System.out.println("prss b2");
             bcPunteggio.dimezza();
-        
         }
         };
         /////////////////////////

@@ -28,9 +28,20 @@ public class Elementi extends HBox {
     Polygon polygon = new Polygon(50.0, 0.0,0.0, 100.0,100.0, 100.0);
     Rectangle rettangle = new Rectangle(100,50);
     //currentPolygon.setStroke(Color.BLACK);
+    
+    EventHandler<javafx.scene.input.MouseEvent> FormaClick;
+    
+    
     public Elementi(){
         ImplementaSingleRandom();
-        //this.setSpacing(20);
+        //this.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, FormaClick);
+        FormaClick = new EventHandler<javafx.scene.input.MouseEvent>() { 
+        @Override
+        public void handle(javafx.scene.input.MouseEvent e) {
+            System.out.println("CLICCATO FIGUARA");
+           
+        }
+        };
     }
     
     public void ImplementaSingleRandom(){
