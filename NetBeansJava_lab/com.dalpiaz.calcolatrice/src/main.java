@@ -77,7 +77,7 @@ public class main extends Application {
         }
         finale.getChildren().addAll(numUno,numDue,Onepiu,Fourmeno,SevDiv,ZeroCancPer);
         root.setCenter(finale);
-        Scene scene = new Scene(root, 400, 700);
+        Scene scene = new Scene(root, 540, 800);
         double tmp=root.getWidth()/4;
         System.out.println(tmp);
         
@@ -87,8 +87,8 @@ public class main extends Application {
         public void handle(MouseEvent e) { 
             System.out.println("CLICCATO"); 
             System.out.println(e.getSource());
-            System.out.println(e.getTarget());
-            } 
+            
+        } 
         };
         
         
