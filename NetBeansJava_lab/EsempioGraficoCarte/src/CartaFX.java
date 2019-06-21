@@ -70,6 +70,7 @@ public class CartaFX extends StackPane {
        
        this.getChildren().addAll(rett,t);
        this.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+      
     }
     enum Tsseme{C,P,Q,F}
     int n;
