@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +26,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class Elementi extends HBox {
     Circle circle =new Circle(50,50,50);
+    
     Polygon polygon = new Polygon(50.0, 0.0,0.0, 100.0,100.0, 100.0);
     Rectangle rettangle = new Rectangle(100,50);
     //currentPolygon.setStroke(Color.BLACK);
@@ -33,12 +35,16 @@ public class Elementi extends HBox {
     
     
     public Elementi(){
+        circle.setFill(Color.BLUEVIOLET);
+        rettangle.setFill(Color.GREENYELLOW);
+        polygon.setFill(Color.CORAL);
         ImplementaSingleRandom();
-        //this.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, FormaClick);
+        //circle.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, FormaClick);
+        
         FormaClick = new EventHandler<javafx.scene.input.MouseEvent>() { 
         @Override
         public void handle(javafx.scene.input.MouseEvent e) {
-            System.out.println("CLICCATO FIGUARA");
+            System.out.println("CLICCATO FIGURA");
            
         }
         };

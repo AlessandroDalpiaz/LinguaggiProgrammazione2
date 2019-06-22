@@ -28,7 +28,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import static javax.swing.text.StyleConstants.Background;
@@ -88,7 +90,7 @@ public static final int NUM_MONETE = 3; // numero di monete disponibili
         final Button b3= new Button();
         b1.setText("Nuova Partita");
         b2.setText("SPIN");
-        b3.setText("PLAY");
+        b3.setText("PAY");
         /////////////////////////
         EventHandler<javafx.scene.input.MouseEvent> btn_newGame;
         btn_newGame = new EventHandler<javafx.scene.input.MouseEvent>() { 
@@ -127,9 +129,21 @@ public static final int NUM_MONETE = 3; // numero di monete disponibili
         }
         };
         /////////////////////////
+        /////////////////////////
+        EventHandler<javafx.scene.input.MouseEvent> btn_Pay;
+        btn_Pay= new EventHandler<javafx.scene.input.MouseEvent>() { 
+        @Override
+        public void handle(javafx.scene.input.MouseEvent e) {
+            System.out.println("click b3");
+            double v= bcCredito.get()/100.0;
+            showPopup("HAI VINTO "+ v+ " EURO!");
+        }
+        };
+        /////////////////////////
         b1.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, btn_newGame);
         b2.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, btn_Spin);
         b2.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_PRESSED, btn_Spin_Press);
+        b3.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_PRESSED, btn_Pay);
         bottoni.getChildren().add(b1);
         bottoni.getChildren().add(b2);
         bottoni.getChildren().add(b3);
@@ -169,13 +183,12 @@ public static final int NUM_MONETE = 3; // numero di monete disponibili
         final TextField tff=new TextField();
         EventHandler<javafx.scene.input.MouseEvent> ModTest;
         ModTest = new EventHandler<javafx.scene.input.MouseEvent>() { 
-        @Override
-        public void handle(javafx.scene.input.MouseEvent e) {
-            System.out.println("CLICCATO"); 
-            tff.setText("2");
-            
-        }
-    };
+            @Override
+            public void handle(javafx.scene.input.MouseEvent e) {
+                System.out.println("CLICCATO"); 
+                tff.setText("2");
+            }
+        };
         //////////////////////
         //inserisco nel box
         for (int i = 0; i < NUM_MONETE; i++) {
@@ -194,6 +207,20 @@ public static final int NUM_MONETE = 3; // numero di monete disponibili
         primaryStage.setScene(scene);
         primaryStage.show();
         
+        
+    }
+        public void showPopup(String message) {
+        Label label= new Label(message);
+        label.setAlignment(Pos.CENTER);
+        //label.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        Scene sc = new Scene(label, 500, 200);
+        Stage stage = new Stage();
+        stage.setScene(sc);
+        stage.setX(100);
+        stage.setY(100);
+        stage.initModality(Modality.WINDOW_MODAL);
+        //stage.initOwner(mainWindow);
+        stage.show();
     }
 
     /**
