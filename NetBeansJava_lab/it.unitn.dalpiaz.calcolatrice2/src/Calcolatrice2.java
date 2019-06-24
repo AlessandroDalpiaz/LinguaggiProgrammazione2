@@ -7,6 +7,8 @@
 import com.sun.scenario.effect.Effect;
 import java.awt.geom.Path2D;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -63,17 +65,17 @@ public class Calcolatrice2 extends Application {
         //sx
         Label text =new Label("              ");
         root.setLeft(text);
-        root.setAlignment(text, Pos.CENTER);
+        root.setAlignment(text, Pos.CENTER_LEFT);
         //----primo,secondo  e terzo box
         
         campi.setPrefColumns(1);
         
         
         //----bottoni operazioni----------
-        OperationBotton btn_piu= new OperationBotton(this,"PIU", "+");
-        OperationBotton btn_meno= new OperationBotton(this,"MENO", "-");
-        OperationBotton btn_per= new OperationBotton(this,"PER", "*");
-        OperationBotton btn_diviso= new OperationBotton(this,"DIVISO", "/");
+        final OperationBotton btn_piu= new OperationBotton(this,"PIU", "+");
+        final OperationBotton btn_meno= new OperationBotton(this,"MENO", "-");
+        final OperationBotton btn_per= new OperationBotton(this,"PER", "*");
+        final OperationBotton btn_diviso= new OperationBotton(this,"DIVISO", "/");
         
         OpBottons.getChildren().addAll(btn_piu,btn_meno,btn_per,btn_diviso);
         OpBottons.setAlignment(Pos.CENTER);
@@ -83,6 +85,7 @@ public class Calcolatrice2 extends Application {
         
         //---------------right
         Button btnClear=new Button("CLEAR");
+        btnClear.setMinHeight(50);
         EventHandler<MouseEvent> pulisci=new EventHandler<MouseEvent>() {
 
             @Override
@@ -93,25 +96,51 @@ public class Calcolatrice2 extends Application {
                 input2.setText("");
                 output.setText("");
                 
-                //OpBottons.getChildren().get(0).setEffect(shadow);
+               // OpBottons.getChildren().get(0).setEffect(shadow);
             }
         };
-        /*//Removing the shadow when the mouse cursor is off
-        btnClear.addEventHandler(MouseEvent.MOUSE_EXITED, 
+        //Removing the shadow when the mouse cursor is off
+        /*btnClear.addEventHandler(MouseEvent.MOUSE_EXITED, 
             new EventHandler<MouseEvent>() {
                 @Override public void handle(MouseEvent e) {
                     OpBottons.getChildren().get(0).setEffect(null);
                 }
-        });
+        });*/
         
-        *////////////////////
         btnClear.addEventFilter(MouseEvent.MOUSE_CLICKED, pulisci);
         root.setRight(btnClear);
-        root.setAlignment(btnClear, Pos.CENTER);
+        btnClear.setMinWidth(100.0);
+        
+        root.setAlignment(btnClear, Pos.CENTER_RIGHT);
+        
+        //-----------------------botton
+        Label lb=new Label("Copyright 2019");
+        root.setBottom(lb);
+        
         Scene scene = new Scene(root, 600, 200);
         
         primaryStage.setTitle("MiniCalculator");
         primaryStage.setScene(scene);
+        
+        primaryStage.sizeToScene();
+        //MODIFICARE IN TEMPO REALE LE MISURE WIDTH E HEIGHT
+        primaryStage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                double w = newValue.doubleValue() * 3 / 5;
+                campi.setMaxWidth(w);
+                campi.setMinWidth(w);
+                OpBottons.setMaxWidth(w);
+                OpBottons.setMinWidth(w);
+                double iw = Math.floor(w / 4);
+                
+                btn_piu.setOBWidth(iw); 
+                btn_meno.setOBWidth(iw);
+                btn_diviso.setOBWidth(iw);
+                btn_per.setOBWidth(iw);
+            }
+        });
+        
         primaryStage.show();
         
         
@@ -201,7 +230,7 @@ public class Calcolatrice2 extends Application {
         Label label = new Label(msg);
         label.setAlignment(Pos.CENTER);
         label.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        Scene sc = new Scene(label, 500, 200);
+        Scene sc = new Scene(label, 300, 200);
         Stage stage = new Stage();
         stage.setScene(sc);
         stage.setX(100);
