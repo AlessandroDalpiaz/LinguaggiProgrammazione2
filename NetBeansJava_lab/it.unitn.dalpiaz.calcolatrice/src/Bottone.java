@@ -53,6 +53,7 @@ public class Bottone extends Button implements EventHandler<ActionEvent> {
     private void addEventHandler(EventType<Event> ROOT, Bottone aThis) {
         System.out.println(this.getText());
         System.out.println(tb.getText());
+        setId(tb.getText());
         //tb.re
     }
    
