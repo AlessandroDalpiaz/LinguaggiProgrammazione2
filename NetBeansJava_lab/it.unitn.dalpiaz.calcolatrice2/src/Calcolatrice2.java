@@ -56,6 +56,7 @@ public class Calcolatrice2 extends Application {
         BorderPane root =new BorderPane();
         final TilePane campi=new TilePane();
         final TilePane OpBottons= new TilePane();
+        final TilePane Num= new TilePane();
         VBox allbtn=new VBox();
         //----titolo-------
         Label lt = new Label("MiniCalculator");
