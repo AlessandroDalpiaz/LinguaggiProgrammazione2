@@ -29,6 +29,8 @@ public class NumButton extends Button{
             //cc.Esegui(getId());
             if(getId()=="="){
                 cc.calcola();
+            }else if(getId()=="C"){
+                cc.reset();
             }else{
                cc.Add(getId()); 
             }

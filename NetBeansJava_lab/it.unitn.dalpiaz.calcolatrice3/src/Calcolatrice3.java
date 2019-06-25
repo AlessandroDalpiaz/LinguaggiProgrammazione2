@@ -39,22 +39,13 @@ public class Calcolatrice3 extends Application {
     @Override
     public void start(Stage primaryStage) {
         BorderPane root = new BorderPane();
-        
-        TilePane Opbottons=new TilePane();
         final TilePane NumBottons=new TilePane();
          ///---------------------------top-----------------------------
         root.setTop(input);
         
         root.setAlignment(input, Pos.CENTER);
         
-        ///---------------------------center---------------------------
-        HBox AllBottons=new HBox();
-        
-        Opbottons.getChildren().addAll(btn_piu,btn_meno,btn_per,btn_diviso);
-        Opbottons.setAlignment(Pos.CENTER);
-        Opbottons.setPrefColumns(1);
-        
-        
+        ///---------------------------center---------------------------        
         NumButton btn_uno =new NumButton(this,"1","1");
         NumButton btn_due =new NumButton(this,"2","2");
         NumButton btn_tre =new NumButton(this,"3","3");
@@ -64,16 +55,13 @@ public class Calcolatrice3 extends Application {
         NumButton btn_sette =new NumButton(this,"7","7");
         NumButton btn_otto =new NumButton(this,"8","8");
         NumButton btn_nove =new NumButton(this,"9","9");
-        NumButton btn_zero =new NumButton(this,".",".");
-        NumButton btn_punto =new NumButton(this,"0","0");
+        NumButton btn_zero =new NumButton(this,"0","0");
+        final NumButton btn_canc =new NumButton(this,"CANC","C");
         final NumButton btn_res =new NumButton(this,"=","=");
         
-        NumButton b=new NumButton(this, "+", "+");
-        NumBottons.getChildren().addAll(btn_sette,btn_otto,btn_nove,btn_diviso,btn_quattro,btn_cinque,btn_sei,btn_per,btn_uno,btn_due,btn_tre,btn_meno,btn_punto,btn_zero,btn_res,btn_piu,b);
+        NumBottons.getChildren().addAll(btn_sette,btn_otto,btn_nove,btn_diviso,btn_quattro,btn_cinque,btn_sei,btn_per,btn_uno,btn_due,btn_tre,btn_meno,btn_canc,btn_zero,btn_res,btn_piu);
         NumBottons.setPrefColumns(3);
-        
-        //AllBottons.getChildren().addAll(NumBottons);
-        
+
         root.setCenter(NumBottons);
         root.setAlignment(NumBottons, Pos.CENTER);
         
@@ -83,9 +71,9 @@ public class Calcolatrice3 extends Application {
         EventHandler<KeyEvent>	keyEventHandler	= new EventHandler<KeyEvent>(){	
             @Override	
             public void handle(KeyEvent	e){
-                if (e.getCode().equals(KeyCode.CANCEL)){
+                if (e.getCode().equals(KeyCode.DELETE)){
                     System.out.println("Buttom	CANC pressed");
-                    SelSegno("+");
+                    reset();
                 }
                 if (e.getCharacter().equals("+")){
                     System.out.println("Buttom	+ pressed");
@@ -126,6 +114,15 @@ public class Calcolatrice3 extends Application {
         primaryStage.setTitle("Calcolatrice 3.0");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    public void reset(){
+        piu=meno=per=diviso=false;
+        btn_piu.setDisable(false);
+        btn_meno.setDisable(false);
+        btn_per.setDisable(false);
+        btn_diviso.setDisable(false);
+        
+        input.setText("");
     }
     public void Add(String msg){
         msg = input.getText()+msg;
