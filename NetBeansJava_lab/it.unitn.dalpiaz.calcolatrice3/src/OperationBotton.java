@@ -36,8 +36,11 @@ public class OperationBotton extends Button{
         addEventHandler(MouseEvent.MOUSE_CLICKED, operation);
     }
     void setOBWidth(double w) {
-            this.setMaxWidth(w);
-            this.setMinWidth(w);
-        }
-    
+        this.setMaxWidth(w);
+        this.setMinWidth(w);
+    }
+    void setOBHeight(double h) {
+        this.setMaxHeight(h);
+        this.setMinHeight(h);
+    }
 }

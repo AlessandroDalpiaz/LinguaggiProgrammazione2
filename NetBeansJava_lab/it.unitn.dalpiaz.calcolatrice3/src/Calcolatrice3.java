@@ -6,6 +6,8 @@
 
 import java.util.Scanner;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -46,16 +48,16 @@ public class Calcolatrice3 extends Application {
         root.setAlignment(input, Pos.CENTER);
         
         ///---------------------------center---------------------------        
-        NumButton btn_uno =new NumButton(this,"1","1");
-        NumButton btn_due =new NumButton(this,"2","2");
-        NumButton btn_tre =new NumButton(this,"3","3");
-        NumButton btn_quattro =new NumButton(this,"4","4");
-        NumButton btn_cinque =new NumButton(this,"5","5");
-        NumButton btn_sei =new NumButton(this,"6","6");
-        NumButton btn_sette =new NumButton(this,"7","7");
-        NumButton btn_otto =new NumButton(this,"8","8");
-        NumButton btn_nove =new NumButton(this,"9","9");
-        NumButton btn_zero =new NumButton(this,"0","0");
+        final NumButton btn_uno =new NumButton(this,"1","1");
+        final NumButton btn_due =new NumButton(this,"2","2");
+        final NumButton btn_tre =new NumButton(this,"3","3");
+        final NumButton btn_quattro =new NumButton(this,"4","4");
+        final NumButton btn_cinque =new NumButton(this,"5","5");
+        final NumButton btn_sei =new NumButton(this,"6","6");
+        final NumButton btn_sette =new NumButton(this,"7","7");
+        final NumButton btn_otto =new NumButton(this,"8","8");
+        final NumButton btn_nove =new NumButton(this,"9","9");
+        final NumButton btn_zero =new NumButton(this,"0","0");
         final NumButton btn_canc =new NumButton(this,"CANC","C");
         final NumButton btn_res =new NumButton(this,"=","=");
         
@@ -106,10 +108,70 @@ public class Calcolatrice3 extends Application {
         
         input.setOnKeyPressed(keyEventHandler);
         
+        //MODIFICARE IN TEMPO REALE LE MISURE WIDTH E HEIGHT
+        primaryStage.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                double w = newValue.doubleValue() * 3 / 5;
+                input.setMaxWidth(w);
+               
+                NumBottons.setMaxWidth(w);
+                NumBottons.setMinWidth(w);
+                double iw = Math.floor(w / 4);
+                
+                btn_uno.setOBWidth(iw);
+                btn_due.setOBWidth(iw);
+                btn_tre.setOBWidth(iw);
+                btn_quattro.setOBWidth(iw);
+                btn_cinque.setOBWidth(iw);
+                btn_sei.setOBWidth(iw);
+                btn_sette.setOBWidth(iw);
+                btn_otto.setOBWidth(iw);
+                btn_nove.setOBWidth(iw);
+                btn_zero.setOBWidth(iw);
+                btn_canc.setOBWidth(iw);
+                btn_res.setOBWidth(iw);
+                
+                btn_piu.setOBWidth(iw); 
+                btn_meno.setOBWidth(iw);
+                btn_diviso.setOBWidth(iw);
+                btn_per.setOBWidth(iw);
+            }
+        });
+        //MODIFICARE IN TEMPO REALE LE MISURE WIDTH E HEIGHT
+        primaryStage.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number oldValue, Number newValue) {
+                double w = newValue.doubleValue() * 3 / 5;
+                input.setMaxHeight(w);
+
+               
+                NumBottons.setMaxHeight(w);
+                NumBottons.setMinHeight(w);
+                double iw = Math.floor(w / 4);
+                
+                btn_uno.setOBHeight(iw);
+                btn_due.setOBHeight(iw);
+                btn_tre.setOBHeight(iw);
+                btn_quattro.setOBHeight(iw);
+                btn_cinque.setOBHeight(iw);
+                btn_sei.setOBHeight(iw);
+                btn_sette.setOBHeight(iw);
+                btn_otto.setOBHeight(iw);
+                btn_nove.setOBHeight(iw);
+                btn_zero.setOBHeight(iw);
+                btn_canc.setOBHeight(iw);
+                btn_res.setOBHeight(iw);
+                
+                btn_piu.setOBHeight(iw); 
+                btn_meno.setOBHeight(iw);
+                btn_diviso.setOBHeight(iw);
+                btn_per.setOBHeight(iw);
+            }
+        });
         
         
-        
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 500, 250);
         
         primaryStage.setTitle("Calcolatrice 3.0");
         primaryStage.setScene(scene);

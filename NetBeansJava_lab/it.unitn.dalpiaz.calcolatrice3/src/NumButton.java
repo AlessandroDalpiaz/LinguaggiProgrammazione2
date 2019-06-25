@@ -43,6 +43,17 @@ public class NumButton extends Button{
         cc=c;
         setText(Scritta);
         setId(Num);
+       // setPrefWidth(500);
         addEventFilter(MouseEvent.MOUSE_CLICKED, bClick);
+    }
+    void setOBWidth(double w) {
+        this.setMaxWidth(w);
+        System.out.println(w);
+        this.setMinWidth(w);
+    }
+    void setOBHeight(double h) {
+        this.setMaxHeight(h);
+        System.out.println(h);
+        this.setMinHeight(h);
     }
 }
