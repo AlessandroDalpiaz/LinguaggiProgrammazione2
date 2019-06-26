@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
  */
 
 /**
- *
+ *Classe che estende Terreno: vale una cella
  * @author Alessandro
  */
 class Prato extends Terreno{

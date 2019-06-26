@@ -1,4 +1,5 @@
 
+import java.lang.ref.Reference;
 import java.util.Random;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -14,28 +15,35 @@ import javafx.scene.shape.Circle;
  */
 
 /**
- *
+ *classe che estente Terreno: val e una cella
  * @author Alessandro
  */
 class Strada extends Terreno{
     int cordX,cordY;
-    boolean visibile;
+    boolean visibile,haCliccato=false;
     GridPane city;
-        Strada(GridPane _city,int x,int y){
+        Strada(boolean clicked,GridPane _city,int x,int y){
+            haCliccato=clicked;
             city=_city;
             cordX=x;
             cordY=y;
             super.puoAvereMacchina=true;
             rett.setFill(Color.GRAY);
             CreaMacchina();
-            randomMacchinaVisibile();
+            SetVisible();
 
             
         }
+/**
+ *cambia lo stato dei visibilità delle macchine 
+ */
  void SetVisible(){
      visibile =!visibile;
      auto.setVisible(visibile);;
  }
+ /**
+  * crea macchine in posti random
+  */
  void randomMacchinaVisibile(){
      Random rnd=new Random();
      
