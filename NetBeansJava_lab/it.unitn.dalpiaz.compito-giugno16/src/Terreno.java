@@ -1,4 +1,6 @@
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -16,18 +18,34 @@ import javafx.scene.shape.Rectangle;
  */
 public abstract class Terreno extends StackPane{
     boolean puoAvereMacchina=false;
-    Circle auto =new Circle(50,50,50); 
-    Rectangle rett= new Rectangle(100, 100);
+    Circle auto =new Circle(20,20,20); 
+    Rectangle rett= new Rectangle(50, 50);
+    EventHandler<MouseEvent> changeStatus;
+        
+    
     Terreno(){
-       // CreaMacchina();
+        rett.setStroke(Color.WHITE);
+        changeStatus= new EventHandler<MouseEvent>() {
+        
+           @Override
+           public void handle(MouseEvent t){
+               cambia();
+           }
+       };
+        addEventHandler(MouseEvent.MOUSE_CLICKED, changeStatus);
     }
-    abstract void  CreaMacchina();/*{
-        if(puoAvereMacchina){
-            auto.setFill(Color.BLUE);
-            this.getChildren().addAll(rett,auto);
+    void cambia(){
+        if (this instanceof Prato) {
+            System.out.print(((Prato)this).cordX);
+            System.out.println(((Prato)this).cordY);
+            System.out.println("PRATO");
+            ((Prato)this).city.add(new Strada(((Prato)this).city,((Prato)this).cordX,((Prato)this).cordY), ((Prato)this).cordX,((Prato)this).cordY);
+        }else{
+            System.out.print(((Strada)this).cordX);
+            System.out.println(((Strada)this).cordY);
+            System.out.println("STRADA");
+            
         }
-        else{
-            this.getChildren().addAll(rett);
-        }
-    }*/
+    }
+    abstract void  CreaMacchina();
 }

@@ -1,4 +1,8 @@
 
+import com.sun.javafx.embed.AbstractEvents;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 /*
@@ -12,13 +16,19 @@ import javafx.scene.paint.Color;
  * @author Alessandro
  */
 class Prato extends Terreno{
-        Prato(){
+        int cordX,cordY;
+        GridPane city;
+        Prato(GridPane _city,int x,int y){
+            city=_city;
+            cordX=x;
+            cordY=y;
             super.puoAvereMacchina=false;
             rett.setFill(Color.GREEN);
+            this.getChildren().addAll(rett);
         }
 
     @Override
     void CreaMacchina() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
-    }
+}
