@@ -54,18 +54,9 @@ public class CompitoGiugno19 extends Application {
         dialog.setContentText("Answer label:");
         String s= dialog.showAndWait().get();*/
         
-        
-
-        
-        
-        
-        
-        
-        
-        root.setLeft(btn_riordina);
-        root.setCenter(colonna);
-        root.setBottom(eliminati_box);
-        
+        /**
+         * EventHandler del bottone riordina
+         */
         btn_riordina.setOnMouseClicked(new EventHandler<MouseEvent>(){
 
             @Override
@@ -76,6 +67,9 @@ public class CompitoGiugno19 extends Application {
             }
             
         });
+        /**
+         * EventHandler tasto R
+         */
         EventHandler<KeyEvent> eventoTasti = new EventHandler<KeyEvent>() {
 
             @Override
@@ -87,6 +81,9 @@ public class CompitoGiugno19 extends Application {
                 }
             }
         };
+        /**
+         * EventHandler per tasti numerici
+         */
         EventHandler<KeyEvent> eventoNum = new EventHandler<KeyEvent>() {
 
             @Override
@@ -101,6 +98,9 @@ public class CompitoGiugno19 extends Application {
                 }   
             }
         };
+        /**
+         * EventHandler aggiornamento colonna
+         */
         EventHandler<MouseEvent> aggiornaOrdina = new EventHandler<MouseEvent>() {
 
             @Override
@@ -109,6 +109,9 @@ public class CompitoGiugno19 extends Application {
             }
         };
         
+        root.setLeft(btn_riordina);
+        root.setCenter(colonna);
+        root.setBottom(eliminati_box);
         
         primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, eventoTasti);
         primaryStage.addEventHandler(KeyEvent.KEY_TYPED, eventoNum);
@@ -131,6 +134,10 @@ public class CompitoGiugno19 extends Application {
         Random rnd=new Random();
         return rnd.nextInt(x);
     }
+    /**
+     * Metodo ordina lista  (numeri maggiori sotto, numeri minori sopra)
+     * @return lista aggiornata ordinata
+     */
     ArrayList<Tile> ordinaLista(){
         ArrayList<Tile> listaNuova =new ArrayList();
         //Collections.sort();
@@ -146,6 +153,9 @@ public class CompitoGiugno19 extends Application {
         
         return listaNuova;
     }
+    /**
+     * aggironamento posizione e spostamento degli elementi se uguali
+     */
     void aggiornaAlClick(){
         for (int i = 0; i < elementiArray.size(); i++) {
             for (int j = 0; j < elementiArray.size(); j++) {
@@ -166,9 +176,12 @@ public class CompitoGiugno19 extends Application {
                 colonna.getChildren().addAll(elementiArray);
             }
         }
-        
-        
     }
+    /**
+     * Metodo metti Sotto e Sopra in base al tipo di figura
+     * @param t elemento da spostare
+     * @return lista aggiornata
+     */
     ArrayList<Tile> mettiSottoSopra(Tile t){
         ArrayList<Tile> newLista=new ArrayList();
         if(t instanceof SquareTile){
@@ -188,6 +201,10 @@ public class CompitoGiugno19 extends Application {
         }
         return newLista;
     }
+    /**
+     * Metodo creazione della colonna con gli elementi
+     * @param num numero max elementi da inserire
+     */
     void generaColonna(int num){
         int num_ciascuno= num/2;
         int contaR;
@@ -220,6 +237,12 @@ public class CompitoGiugno19 extends Application {
             }
         }
     }
+    /**
+     * Metodo equal tra due elementi .Verifico il tipo e il numero
+     * @param t1 elemento 1
+     * @param t2 elemento 2
+     * @return ritorna true se sono uguali
+     */
     boolean tileEquals(Tile t1,Tile t2){
         //System.out.println("t1--> "+ t1);
         //System.out.println("t2--> "+ t2);
@@ -240,6 +263,11 @@ public class CompitoGiugno19 extends Application {
         return false;
         //return ((t1 instanceof SquareTile)==(t2 instanceof SquareTile) && ((SquareTile)t1).numero==((SquareTile)t2).numero);// || ( && ((CircleTile)t1).numero==((CircleTile)t2).numero);
     }
+    /**
+     * Metodo per la ricerca di un elemento
+     * @param t elemento da cercare
+     * @return true se l'elemento esiste all'interno della lista
+     */
     boolean checkIfExist(Tile t){
         for (int i = 0; i < elementiArray.size(); i++) {
             if (tileEquals(t,elementiArray.get(i))) {

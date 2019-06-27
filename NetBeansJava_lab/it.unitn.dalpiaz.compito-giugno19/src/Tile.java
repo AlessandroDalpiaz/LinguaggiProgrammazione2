@@ -29,6 +29,9 @@ public class Tile extends StackPane{
             
         });
     }
+    /**
+     * Metodo greather than and less than. Serve per modificare il numero all'interno della label
+     */
     void gtlt(){
         cliccato=true;
         if (this instanceof SquareTile) {
