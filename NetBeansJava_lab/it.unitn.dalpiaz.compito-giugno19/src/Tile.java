@@ -1,5 +1,7 @@
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 /*
@@ -15,6 +17,34 @@ import javafx.scene.layout.StackPane;
 public class Tile extends StackPane{
     int numero;
     Label lbl_number=new Label();
+    boolean cliccato=false;
+    Tile(){
+        addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>(){
+
+            @Override
+            public void handle(MouseEvent t) {
+                
+                gtlt();
+            }
+            
+        });
+    }
+    void gtlt(){
+        cliccato=true;
+        if (this instanceof SquareTile) {
+            numero--;
+            if (numero==-1) {
+                numero=9;
+            }
+        }else{
+            numero++;
+            if (numero==10) {
+                numero=0;
+            }
+        }
+        
+        lbl_number.setText(String.valueOf(numero));
+    }
     
         
 }

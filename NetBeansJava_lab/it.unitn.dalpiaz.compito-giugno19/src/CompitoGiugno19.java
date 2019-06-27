@@ -6,6 +6,7 @@
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import javafx.application.Application;
@@ -13,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -29,7 +31,9 @@ import javafx.stage.Stage;
 public class CompitoGiugno19 extends Application {
         ArrayList<Tile> elementiArray= new ArrayList();
         Button btn_riordina=new Button("Riordina");
-    @Override
+        final VBox colonna =new VBox();       
+        final HBox eliminati_box = new HBox();
+        @Override
     public void start(Stage primaryStage) {
         BorderPane root =new BorderPane();
         /*********RICHIESTA UTENTE**********/
@@ -43,7 +47,6 @@ public class CompitoGiugno19 extends Application {
                 numCorrect=true;
             }
         }
-        System.out.println("num inertito : "+num_figure);
         //pdf 5_JavaFXIntro.pptx.pdf
         /*TextInputDialog dialog= new TextInputDialog("Default answer");
         dialog.setTitle("Dialog Title");
@@ -52,8 +55,11 @@ public class CompitoGiugno19 extends Application {
         String s= dialog.showAndWait().get();*/
         
         
-        VBox colonna =new VBox();       
-        HBox eliminati_box = new HBox();
+
+        
+        
+        
+        
         
         
         root.setLeft(btn_riordina);
@@ -64,7 +70,9 @@ public class CompitoGiugno19 extends Application {
 
             @Override
             public void handle(MouseEvent t) {
-                System.out.println("hai cliccario il bootonz");
+                elementiArray= ordinaLista();
+                colonna.getChildren().clear();
+                colonna.getChildren().addAll(elementiArray);
             }
             
         });
@@ -72,21 +80,44 @@ public class CompitoGiugno19 extends Application {
 
             @Override
             public void handle(KeyEvent t) {
-                System.out.println(t.getCharacter());
-                if(t.getCharacter().equals("R")){
-                    System.out.println("hai cliccato R");
+                if(t.getCode()==KeyCode.R){
+                    elementiArray= ordinaLista();
+                    colonna.getChildren().clear();
+                    colonna.getChildren().addAll(elementiArray);
                 }
             }
         };
-        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, eventoTasti);
-        generaColonna(num_figure);
-        System.out.println(num_figure);
+        EventHandler<KeyEvent> eventoNum = new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent t) {
+                for (int i = 0; i < elementiArray.size(); i++) {
+                    for (int j = 0; j < 10; j++) {
+                       if(t.getCharacter().equals(String.valueOf(j)) && elementiArray.get(i).numero==j){
+                            elementiArray.get(i).gtlt();
+                            aggiornaAlClick();
+                       } 
+                    }  
+                }   
+            }
+        };
+        EventHandler<MouseEvent> aggiornaOrdina = new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent e) {
+                aggiornaAlClick();
+            }
+        };
         
+        
+        primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, eventoTasti);
+        primaryStage.addEventHandler(KeyEvent.KEY_TYPED, eventoNum);
+        primaryStage.addEventHandler(MouseEvent.MOUSE_CLICKED, aggiornaOrdina);
+        generaColonna(num_figure);       
         colonna.getChildren().addAll(elementiArray);
         
         
         Scene scene = new Scene(root, 520, 900);
-        
         primaryStage.setTitle("Esame Giugno 2019");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -100,35 +131,102 @@ public class CompitoGiugno19 extends Application {
         Random rnd=new Random();
         return rnd.nextInt(x);
     }
+    ArrayList<Tile> ordinaLista(){
+        ArrayList<Tile> listaNuova =new ArrayList();
+        //Collections.sort();
+        int max=0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < elementiArray.size(); j++) {
+                if(i==elementiArray.get(j).numero)
+                {
+                    listaNuova.add(elementiArray.get(j));
+                }
+            }
+        }
+        
+        return listaNuova;
+    }
+    void aggiornaAlClick(){
+        for (int i = 0; i < elementiArray.size(); i++) {
+            for (int j = 0; j < elementiArray.size(); j++) {
+               if (i!=j && tileEquals(elementiArray.get(i),elementiArray.get(j))) {
+                    elementiArray.get(i).setDisable(true);
+                    elementiArray.get(j).setDisable(true);
+                    eliminati_box.getChildren().addAll(elementiArray.get(i),elementiArray.get(j));
+                    elementiArray.remove(elementiArray.get(j));
+                    elementiArray.remove(elementiArray.get(i));
+               }
+            }
+        }
+        for (int j = 0; j < elementiArray.size(); j++) {
+            if(elementiArray.get(j).cliccato){
+                elementiArray.get(j).cliccato=false;
+                elementiArray=mettiSottoSopra(elementiArray.get(j));
+                colonna.getChildren().clear();
+                colonna.getChildren().addAll(elementiArray);
+            }
+        }
+        
+        
+    }
+    ArrayList<Tile> mettiSottoSopra(Tile t){
+        ArrayList<Tile> newLista=new ArrayList();
+        if(t instanceof SquareTile){
+            newLista.add(t);
+            for (int i = 0; i < elementiArray.size(); i++) {
+                if (!tileEquals(elementiArray.get(i), t)) {
+                    newLista.add(elementiArray.get(i));                            
+                }
+            }
+        }else{
+            for (int i = 0; i < elementiArray.size(); i++) {
+                if (!tileEquals(elementiArray.get(i), t)) {
+                    newLista.add(elementiArray.get(i));                            
+                }
+            }
+            newLista.add(t);
+        }
+        return newLista;
+    }
     void generaColonna(int num){
         int num_ciascuno= num/2;
         int contaR;
         int contaC;
+        int rand;
         contaC = contaR=num_ciascuno;
         for (int i = 0; i < num; i++) {
-            if (randomGenerator(11)>5 && contaC!=0) {
+            rand =randomGenerator(11);
+            if (rand>5 && contaC!=0) {
+                CircleTile c=new CircleTile(randomGenerator(10),Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
+                while(checkIfExist(c)){
+                    c=new CircleTile(randomGenerator(10),Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
+                }
+                elementiArray.add(c);
+                contaC--;
+            }else if(contaR!=0){
+                SquareTile r=new SquareTile(randomGenerator(10),Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
+                while(checkIfExist(r)){
+                    r=new SquareTile(randomGenerator(10),Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
+                }
+                elementiArray.add(r);
+                contaR--;
+            }else{
                 CircleTile c=new CircleTile(randomGenerator(9)+1,Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
                 while(checkIfExist(c)){
                     c=new CircleTile(randomGenerator(9)+1,Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
                 }
-                System.out.println("circle -->"+contaC);
                 elementiArray.add(c);
                 contaC--;
-            }else if(contaR!=0){
-                SquareTile r=new SquareTile(randomGenerator(9)+1,Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
-                while(checkIfExist(r)){
-                    r=new SquareTile(randomGenerator(9)+1,Color.rgb(randomGenerator(256),randomGenerator(256),randomGenerator(256)));
-                }
-                System.out.println("rett -->"+contaR);
-                elementiArray.add(r);
-                contaR--;
             }
         }
     }
     boolean tileEquals(Tile t1,Tile t2){
+        //System.out.println("t1--> "+ t1);
+        //System.out.println("t2--> "+ t2);
         if (t1 instanceof SquareTile) {
             if (t2 instanceof SquareTile) {
                 if(((SquareTile)t1).numero==((SquareTile)t2).numero){
+
                     return true;
                 }
             }
