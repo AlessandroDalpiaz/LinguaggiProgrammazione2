@@ -17,5 +17,8 @@ public class SquareTile extends Tile{
     SquareTile(int x,Color p){
         numero=x;
         rectangle.setFill(p);
+        lbl_number.setText(String.valueOf(x));
+        lbl_number.setTextFill(p.invert());
+        getChildren().addAll(rectangle,lbl_number);
     }
 }

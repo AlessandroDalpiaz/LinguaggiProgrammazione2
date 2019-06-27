@@ -1,4 +1,5 @@
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 /*
@@ -13,6 +14,7 @@ import javafx.scene.layout.StackPane;
  */
 public class Tile extends StackPane{
     int numero;
+    Label lbl_number=new Label();
     
         
 }

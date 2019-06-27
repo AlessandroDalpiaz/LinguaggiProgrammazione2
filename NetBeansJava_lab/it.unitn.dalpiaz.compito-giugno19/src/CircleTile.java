@@ -17,6 +17,9 @@ Circle circle=new Circle(50,50,50);
     public CircleTile(int x,Color p) {
         numero=x;
         circle.setFill(p);
+        lbl_number.setText(String.valueOf(x));
+        lbl_number.setTextFill(p.invert());
+        getChildren().addAll(circle,lbl_number);
     }
     
 }
