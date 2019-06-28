@@ -185,7 +185,7 @@ public class CompitoLuglio2018 extends Application {
                             System.out.println(index);
                         }
                     }
-                    
+                   dimAttuale--;
                     ArrayList<Figura> tmp=new ArrayList();
                     tmp.add(new Figura());
                     for (int i = 0; i < figure.size(); i++) {
