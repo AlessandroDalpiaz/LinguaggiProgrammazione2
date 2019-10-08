@@ -1,46 +1,55 @@
 # Poly/ML 5.7.1 Release
+
 ## comandi ed esempi
 
 ### **COMANDI utili**
 
-| comando | Descrizione |
-| ------ | ------ |
-| val | inizializza qualsiasi cosa. La variabile può essere di tipo : *intera, reale, negativa, carattere, stringa, booleana, unit value(singolo valore)*|
-| ~ | numero negativo|
-| if() then() else();| se allora, altrimenti (parentesi opzionali)|
-| fun NOME(INPUT)=ESPRESSIONE;| inizializza funzione|
-| VARIABILE= fn INPUT=>ESPRESSIONE | inizializza una funzione all'interno di una variabile |
-| val rec | inizializza --- ricorsiva|
-| case VARIABILE of VARIABILE=>CONSEGUENZA \|VARIABILE =>CONSEGUENZA \|_(*DEFAULT*)=>3;  | switch case|
-| goto | Salto nel ciclo|
+| Comando                                                                                 | Descrizione                                                                                                                                       |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `val`                                                                                   | inizializza qualsiasi cosa. La variabile può essere di tipo : _intera, reale, negativa, carattere, stringa, booleana, unit value(singolo valore)_ |
+| `~`                                                                                     | numero negativo                                                                                                                                   |
+| `if()` `then()` `else()`                                                                | se allora, altrimenti (parentesi opzionali)                                                                                                       |
+| `fun NOME(INPUT)=ESPRESSIONE`                                                           | inizializza funzione                                                                                                                              |
+| `VARIABILE= fn INPUT=>ESPRESSIONE`                                                      | inizializza una funzione all'interno di una variabile                                                                                             |
+| `val rec`                                                                               | inizializza --- ricorsiva                                                                                                                         |
+| `case VARIABILE of VARIABILE=>CONSEGUENZA \|VARIABILE =>CONSEGUENZA \|_(*DEFAULT*)=>3;` | switch case                                                                                                                                       |
+| `goto`                                                                                  | Salto nel ciclo                                                                                                                                   |
+
 http://sml-family.org/Basis/list.html
+
 ---
+
 ## Le variabili
 
-\> =input per polyML;
+`>` =input per polyML;
 
-senza \> è il suo output;
+senza `>` è il suo output;
 
-**;** -> `sempre messo a fine riga.`
+`;` -> `sempre messo a fine riga.`
 
 **dichiarare ed inizializzare una variabile**
+
 ```sml
 > val x = 3;
 val x = 3: int
 ```
-Come notiamo Poly capisce che abbiamo inizializzato una variabile intera con *int*.
+
+Come notiamo Poly capisce che abbiamo inizializzato una variabile intera con `int`.
 Gli altri tipi di variabili possono essere:
+
 ```sml
 > val x = 3.0;
 val x = 3.0: real
 > val x = ~3;
 val x = ~3: int
 ```
-rispettivamente abbiamo creato una variabile *reale* ed una  *negativa*.
 
-**operazioni tra variabili**
+rispettivamente abbiamo creato una variabile _reale_ ed una _negativa_.
+
+**Operazioni tra variabili**
 
 Vediamo alcuni esempi:
+
 ```sml
 > 5+4;
 val it = 9: int
@@ -55,7 +64,9 @@ val it = 2.65: real
 > (~5)*4;
 val it = ~20: int
 ```
+
 Se abbiamo già inizializzato le variabili e vogliamo utilizzarle per qualche operazione basta richiamarle. Vediamo alcuni esempi:
+
 ```sml
 > val x =5;
 val x = 5: int
@@ -66,12 +77,16 @@ val it = 10: int
 > y*(x*x);
 val it = 50: int
 ```
+
 Inoltre possiamo memorizzare su una nuova variabile il risultato di un operazione (Ovviamente la nuova varibile deve essere dello stesso tipo delle altre):
+
 ```sml
 > val a= x+y;
 val a = 7: int
 ```
-**variabili booleane**
+
+**Variabili booleane**
+
 ```sml
 > val t= true;
 val t = true: bool
@@ -80,41 +95,55 @@ val f = false: bool
 > 5=3;
 val it = false: bool
 ```
+
 La verifica dell'uguaglianza vale solo per gli interi.
 
-**stampa variabili**
+**Stampa variabili**
 
 Per poter visualizzare il contenuto di una variabile basta richiamarla:
+
 ```sml
 > a;
 val it = 7: int
 > f;
 val it = false: bool
 ```
-Come si nota le operazione `valgono SOLAMENTTE per variabili dello STESSO TIPO`. 
 
- ---
- ## if then else
- Vediamo subito un esempio:
- ```sml
- > if 5>0 then true else false;
+Come si nota le operazione `valgono SOLAMENTTE per variabili dello STESSO TIPO`.
+
+---
+
+## if then else
+
+Vediamo subito un esempio:
+
+```sml
+> if 5>0 then true else false;
 val it = true: bool
- ```
+```
+
 Al posto di true e false possiao mettere qualsiasi cosa ad esempio:
+
 ```sml
 > if 5>0 then 10 else 7;
 val it = 10: int
 ```
+
 Possiamo memorizzare questa condizione in una variabile:
+
 ```sml
 > val ris= if 5>0 then 5 else 0;
 val ris = 5: int
 > ris; (*RICHIAMO*)
 val it = 5: int
 ```
+
 ---
-## funzioni
+
+## Funzioni
+
 Per esempio vogliamo creare una funzione che permetta di elevare un numero x alla n dati come input:
+
 ```sml
 > fun eleva(x,n)=if n=0 then 1 else x*(eleva(x,n-1));
 val eleva = fn: int * int -> int
@@ -126,12 +155,16 @@ val x = (2, 3): int * int
 > eleva(x);                (* richiamo con solo X *)
 val it = 8: int
 ```
+
 Inoltre possiamo assegnare il risultato di una variabile:
+
 ```sml
 > val ris= eleva(3,3);
 val ris = 27: int
 ```
+
 Oppure creare una funzione "al volo al suo interno",cioè:
+
 ```sml
 > val y=2;
 val y = 2: int
@@ -141,7 +174,9 @@ val f = fn: int -> int
 > f 4; (*richiamiamo la funzione + INPUT*)
 val it = 6: int
 ```
-Una *funzione* dentro un'altra *funzione*
+
+Una _funzione_ dentro un'altra _funzione_
+
 ```sml
 > fun alcubo(x)= eleva(x,3);
 val alcubo = fn: int -> int
@@ -149,9 +184,13 @@ val alcubo = fn: int -> int
 > alcubo(3);(*richiamiamo la funzione + INPUT*)
 val it = 27: int
 ```
+
 ---
-## switch
+
+## Switch
+
 Come al solito lo switch ha i vari case e quello di default. Vediamo un esempio:
+
 ```sml
 > fun f(x)= case x of
 # 1=>1      (*PRIMO CASO*)
@@ -164,9 +203,13 @@ val it = 3: int
 > f(2);
 val it = 2: int
 ```
+
 ---
-## goto
+
+## Goto
+
 Alcuni linguaggi permettono di eseguire salti all’interno del for per mezzo del comando. Vediamo un esempio:
+
 ```sml
 while true do{
 read(X) ;
@@ -175,19 +218,21 @@ elabora ( X ) ;
 }
 fine: (*continuo del codice oppure una seconda funzione*)
 ```
-***
 
-(lamdax.x(xy))(lamdaz.zx) ==> f(x)=(x.xy)*f(z)=z.x
+---
+
+(lamdax.x(xy))(lamdaz.zx) ==> f(x)=(x.xy)\*f(z)=z.x
 --> x(xy)(barrato) (lamdazzx)((lamdazzx)y)'
 
-### by kuper 12/04/2019
- ```sml
- esercizio da capire e finire
+### Kuper 12/04/2019
+
+```sml
+esercizio da capire e finire
 val rec test= fn empty => (fn f=>0)
 | cons(l,l) => (fn f)=>.....
 
 datatype list = empty | cons of (int*list);
-fun initlist 
+fun initlist
 
 val rec member = fn
 empty => (fn i =>0)
@@ -198,7 +243,7 @@ val a cons(1,cons(2,cons(3,empty))); # inizializzo
 val b cons(1,cons(2,cons(1,empty)));
 
 member b 2: # richiama l elemento 2 in b
-val rec pal=fn 
+val rec pal=fn
 empty => (fn i => true)
 |cons(a,l) => fn i => (
 if a<=1 then true else a= member l (i-1)) and also pal 1 (i-2));
@@ -236,13 +281,16 @@ List.tabulate(10,square)
 
 
 ```
-***
- ### by kuper 29/03/2019
- ```sml
- val test = fn f => fn l => List.lenght (List.filter f l);
- val greatertwo = fn n => n>2;
- val a ={1,2,3,4,5,6};//quadre
- test greatertwo a ;
+
+---
+
+### Kuper 29/03/2019
+
+```sml
+val test = fn f => fn l => List.lenght (List.filter f l);
+val greatertwo = fn n => n>2;
+val a ={1,2,3,4,5,6};//quadre
+test greatertwo a ;
 eq [1,2] [2,1];
 a List.rev a;
 val palindrome = fn l => l=List.rev l;
@@ -274,10 +322,13 @@ fun first_list [] =[]
 | first_list((x,y)::l) =x::first_list l;
 first_list [(1,2),(1,3)];
 
- ```
-***
- ### by kuper 29/03/2019
- ```sml
+```
+
+---
+
+### Kuper 29/03/2019
+
+```sml
 > val meteo = fn x => case x of
 # 1 => "sole"
 # |2 => "neve"
@@ -292,11 +343,11 @@ Static Errors
 val x = [1, 2]: int list
 > val x =[1,2.2];
 poly: : error: Elements in a list have different types.
-   Item 1: 1 : int
-   Item 2: 2.2 : real
-   Reason:
-      Can't unify int (*In Basis*) with real (*In Basis*)
-         (Different type constructors)
+  Item 1: 1 : int
+  Item 2: 2.2 : real
+  Reason:
+     Can't unify int (*In Basis*) with real (*In Basis*)
+        (Different type constructors)
 Found near [1, 2.2]
 Static Errors
 > val x=(2,2.2);
@@ -318,11 +369,11 @@ val it = [4, 3, 1, 6, 7, 8]: int list
 val it = [[4, 3, 1, 6, 7, 8], [6, 7, 8]]: int list list
 > it@itt;
 poly: : error: Type error in function application.
-   Function: @ : int list list * int list list -> int list list
-   Argument: (it, itt) : int list list * int list
-   Reason:
-      Can't unify int list (*In Basis*) with int (*In Basis*)
-         (Different type constructors)
+  Function: @ : int list list * int list list -> int list list
+  Argument: (it, itt) : int list list * int list
+  Reason:
+     Can't unify int list (*In Basis*) with int (*In Basis*)
+        (Different type constructors)
 Found near it @ itt
 Static Errors
 > fun square n=n*n;
@@ -348,20 +399,23 @@ Static Errors
 > fun sum (l:int list):int = case l of
 # [] => 0 | x::xs => x^(concat xs);
 poly: : error: Clauses in case have different types.
-   Clause 1: [] => 0 : string list -> int
-   Clause 2: x :: xs => x ^ (concat xs) : string list -> string
-   Reason:
-      Can't unify int (*In Basis*) with string (*In Basis*)
-         (Different type constructors)
+  Clause 1: [] => 0 : string list -> int
+  Clause 2: x :: xs => x ^ (concat xs) : string list -> string
+  Reason:
+     Can't unify int (*In Basis*) with string (*In Basis*)
+        (Different type constructors)
 Found near case l of [] => 0 | x :: xs => x ^ (concat xs)
 Static Errors
 > fun sum (l:int list):int = case l of
 # [] => 0 | x::xs => x+(sum xs);
 
 ```
- ### by kuper 15/03/2019
- da int to real
- ```sml
+
+### Kuper 15/03/2019
+
+da int to real
+
+```sml
 > fun g(m:int)= fn f:int->real => if m <= 0 then 0.0 else f(m-1) + g(m-1) f;
 val g = fn: int -> (int -> real) -> real
 > fun toreal(i:int) = real(i);
@@ -401,12 +455,14 @@ altro....
 
 
 ```
- ### by kuper 01/03/2019
- ```sml
+
+### Kuper 01/03/2019
+
+```sml
 > fun power (n,m)= if m=0 then 1 else n*power(n,m-1);
 val power = fn: int * int -> int
 > val c= power(2,3);
-val c = 8:int 
+val c = 8:int
 > val f= fn v=>2*v;
 val f = fn: int -> int
 > f 2;
@@ -453,8 +509,5 @@ val f = fn: int -> int -> int
 val f = fn: int * int -> int
 > fun derivative2 f x=(f(x)-f(x-0.001))/0.001;
 val derivative2 = fn: (real -> real) -> real -> real
-> 
-
-
 > val introot m=let fun aux(k,m)=if k*k >m then k-1 else aux(k+1,m) in aux ;//da finire FOTO DYLAN
 ```
